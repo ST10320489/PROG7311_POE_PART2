@@ -1,0 +1,79 @@
+﻿@model Agri_Energy.Models.AddProductViewModel
+
+@{
+    ViewData["Title"] = "Add Product";
+    var productTypes = Model.ProductTypes;
+}
+
+<!--(Microsoft, 2025)-->
+<h2>Add New Product</h2>
+
+<form asp-action="Add1" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label asp-for="Product.Name"></label>
+        <input asp-for="Product.Name" class="form-control" placeholder="E.g. Seed" />
+        <span asp-validation-for="Product.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Description"></label>
+        <textarea asp-for="Product.Description" class="form-control" placeholder="E.g. High-quality organic seed"></textarea>
+        <span asp-validation-for="Product.Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Category"></label>
+        <input asp-for="Product.Category" class="form-control" placeholder="E.g. Grain" />
+        <span asp-validation-for="Product.Category" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.ProductTypeId">Product Type</label>
+        <select asp-for="Product.ProductTypeId" class="form-control">
+            <option value="">Select Product Type</option>
+            @foreach (var productType in productTypes)
+            {
+                <option value="@productType.ProductTypeId">@productType.TypeName</option>
+            }
+        </select>
+        <span asp-validation-for="Product.ProductTypeId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Amount"></label>
+        <input asp-for="Product.Amount" type="number" class="form-control" placeholder="E.g. 10" min="1" />
+        <span asp-validation-for="Product.Amount" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Price"></label>
+        <input asp-for="Product.Price" type="number" step="0.01" class="form-control" placeholder="E.g. 50.00" min="0" />
+        <span asp-validation-for="Product.Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Location"></label>
+        <input asp-for="Product.Location" class="form-control" placeholder="E.g. Cape Town" />
+        <span asp-validation-for="Product.Location" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Status">Status</label>
+        <select asp-for="Product.Status" class="form-control">
+            <option value="">Select Status</option>
+            <option value="Available">Available</option>
+            <option value="Sold">Sold</option>
+        </select>
+        <span asp-validation-for="Product.Status" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="imageFile">Product Image (Optional)</label>
+        <input type="file" name="imageFile" class="form-control" />
+        <input type="hidden" name="Product.ImageUrl" value="placeholder" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Product</button>
+</form>

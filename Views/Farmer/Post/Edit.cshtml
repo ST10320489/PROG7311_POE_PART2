@@ -1,0 +1,46 @@
+﻿@model Agri_Energy.Models.AddPostViewModel
+
+@{
+    ViewData["Title"] = "Edit Post";
+}
+
+<!--(Microsoft, 2025)-->
+<h2>Edit Post</h2>
+
+<form asp-action="EditPost" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" asp-for="Post.PostId" />
+
+    <div class="form-group">
+        <label asp-for="Post.Title"></label>
+        <input asp-for="Post.Title" class="form-control" />
+        <span asp-validation-for="Post.Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Post.Content"></label>
+        <textarea asp-for="Post.Content" class="form-control"></textarea>
+        <span asp-validation-for="Post.Content" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Post.Category"></label>
+        <input asp-for="Post.Category" class="form-control" />
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Post.ImageUrl))
+    {
+        <div class="form-group">
+            <p>Current Image:</p>
+            <img src="@Model.Post.ImageUrl" alt="Post Image" style="max-height: 200px;" />
+        </div>
+    }
+
+    <div class="form-group">
+        <label for="imageFile">Replace Image (Optional)</label>
+        <input type="file" name="imageFile" class="form-control" />
+    </div>
+    <input type="hidden" asp-for="Post.ImageUrl" />
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

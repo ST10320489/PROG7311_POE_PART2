@@ -1,0 +1,68 @@
+﻿@model Agri_Energy.ViewModels.PostDetailsViewModel
+
+<!--(Microsoft, 2025)-->
+<body class="blog-details-page">
+
+    <main class="main">
+
+        <div class="page-title dark-background" data-aos="fade" style="background-image: url(/assets/img/page-title-bg.webp);">
+            <div class="container position-relative">
+                <h1>Post Details</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="@Url.Action("Blog", "Farmer")">Blog</a></li>
+                        <li class="current">Post Details</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-lg-8" style="margin: auto;">
+
+                <section id="blog-details" class="blog-details section">
+                    <div class="container">
+                        <article class="article">
+
+                            <div class="post-img">
+                                <img src="@Model.Post.ImageUrl" alt="@Model.Post.Title" class="img-fluid rounded shadow" />
+                            </div>
+
+                            <h2 class="title">@Model.Post.Title</h2>
+
+                            <div class="meta-top">
+                                <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a>@Model.User?.Email</a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a>@Model.Post.CreatedAt.ToString("yyyy-MM-dd")</a></li>
+
+                                </ul>
+                            </div>
+
+                            <div class="content">
+                                <blockquote>
+                                    <p>@Model.Post.Category</p>
+                                </blockquote>
+                                <p>@Model.Post.Content</p>
+
+                            </div>
+
+                            <div class="meta-bottom">
+                                <i class="bi bi-calendar-event"></i>
+                                <ul class="cats">
+                                    <li>Created at: @Model.Post.CreatedAt</li>
+                                    @if (Model.Post.UpdatedAt.HasValue)
+                                    {
+                                        <li>Updated at: @Model.Post.UpdatedAt.Value</li>
+                                    }
+                                </ul>
+                            </div>
+
+                        </article>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </main>
+
+</body>

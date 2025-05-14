@@ -1,0 +1,74 @@
+﻿@model Agri_Energy.Models.AddProductViewModel
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<!--(Microsoft, 2025)-->
+<h2>Edit Product</h2>
+
+<form asp-action="Edit" asp-controller="Farmer" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="Product.ProductId" value="@Model.Product.ProductId" />
+
+    <div class="form-group">
+        <label asp-for="Product.Name"></label>
+        <input asp-for="Product.Name" class="form-control" />
+        <span asp-validation-for="Product.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Description"></label>
+        <textarea asp-for="Product.Description" class="form-control"></textarea>
+        <span asp-validation-for="Product.Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Category"></label>
+        <input asp-for="Product.Category" class="form-control" />
+        <span asp-validation-for="Product.Category" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.ProductTypeId">Product Type</label>
+        <select asp-for="Product.ProductTypeId" class="form-control">
+            <option value="">Select Product Type</option>
+            @foreach (var productType in Model.ProductTypes)
+            {
+                <option value="@productType.ProductTypeId">@productType.TypeName</option>
+            }
+        </select>
+        <span asp-validation-for="Product.ProductTypeId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Amount"></label>
+        <input asp-for="Product.Amount" class="form-control" />
+        <span asp-validation-for="Product.Amount" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Price"></label>
+        <input asp-for="Product.Price" class="form-control" />
+        <span asp-validation-for="Product.Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Location"></label>
+        <input asp-for="Product.Location" class="form-control" />
+        <span asp-validation-for="Product.Location" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Status"></label>
+        <input asp-for="Product.Status" class="form-control" />
+        <span asp-validation-for="Product.Status" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="imageFile">Product Image (Optional)</label>
+        <input type="file" name="imageFile" class="form-control" />
+    </div>
+    <input type="hidden" asp-for="Product.ImageUrl" />
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

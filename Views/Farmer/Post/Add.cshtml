@@ -1,0 +1,37 @@
+﻿@model Agri_Energy.Models.AddPostViewModel
+
+@{
+    ViewData["Title"] = "Add Post";
+}
+
+<!--(Microsoft, 2025)-->
+<h2>Add New Post</h2>
+
+<form asp-action="AddPost" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label asp-for="Post.Title"></label>
+        <input asp-for="Post.Title" class="form-control" />
+        <span asp-validation-for="Post.Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Post.Content"></label>
+        <textarea asp-for="Post.Content" class="form-control"></textarea>
+        <span asp-validation-for="Post.Content" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Post.Category"></label>
+        <input asp-for="Post.Category" class="form-control"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="imageFile">Attach Image (Optional)</label>
+        <input type="file" name="imageFile" class="form-control" />
+        <input type="hidden" name="Post.Image" value="placeholder" />
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Post</button>
+</form>

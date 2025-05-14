@@ -1,0 +1,112 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/marenelessing/Projects/Agri_Energy/Agri_Energy/Agri_Energy.csproj": {}
+  },
+  "projects": {
+    "/Users/marenelessing/Projects/Agri_Energy/Agri_Energy/Agri_Energy.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/marenelessing/Projects/Agri_Energy/Agri_Energy/Agri_Energy.csproj",
+        "projectName": "Agri_Energy",
+        "projectPath": "/Users/marenelessing/Projects/Agri_Energy/Agri_Energy/Agri_Energy.csproj",
+        "packagesPath": "/Users/marenelessing/.nuget/packages/",
+        "outputPath": "/Users/marenelessing/Projects/Agri_Energy/Agri_Energy/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/marenelessing/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "/Users/marenelessing/Projects": {},
+          "/usr/local/share/dotnet/sdk/7.0.317/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.20, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.20, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[7.0.20, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[7.0.20, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[7.0.20, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "NuGet.PackageManagement": {
+              "target": "Package",
+              "version": "[6.13.2, )"
+            },
+            "Supabase": {
+              "target": "Package",
+              "version": "[1.1.1, )"
+            },
+            "Supabase.Postgrest": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "System.Data.SQLite.Core": {
+              "target": "Package",
+              "version": "[1.0.119, )"
+            },
+            "postgrest-csharp": {
+              "target": "Package",
+              "version": "[3.5.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.317/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

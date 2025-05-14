@@ -1,0 +1,201 @@
+﻿@model Agri_Energy.Models.MarketPlaceViewModel
+
+@{
+    ViewData["Title"] = "Marketplace";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.css">
+<script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script>
+
+<!--(Microsoft, 2025)-->
+<div class="page-title dark-background" data-aos="fade" style="background-image: url(/assets/img/page-title-bg.webp);">
+    <div class="container position-relative">
+        <h1>Market Place</h1>
+        <nav class="breadcrumbs">
+            <ol>
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li class="current">Market Place</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<div class="container mt-4">
+    <form asp-action="MarketPlace" method="get" class="row align-items-end g-3">
+
+        <!-- Search -->
+        <div class="col-md-3">
+            <label class="form-label">Search</label>
+            <input type="text" name="searchTerm" value="@Context.Request.Query["searchTerm"]" class="form-control" placeholder="Name or description" />
+        </div>
+
+        <!-- Product Type -->
+        <div class="col-md-2">
+            <label class="form-label">Product Type</label>
+            <select name="productTypeId" class="form-select">
+                <option value="">All Types</option>
+                @foreach (var type in Model.ProductTypes)
+                {
+                    <option value="@type.ProductTypeId">@type.TypeName</option>
+                }
+            </select>
+        </div>
+
+        <!-- Price Range Slider -->
+        <!-- Price Range with Dual Handle Slider -->
+        <div class="col-md-3">
+            <label class="form-label">Price Range (R)</label>
+            <div class="d-flex align-items-center gap-2" style="height: 48px;">
+                <span id="minPriceDisplay" class="form-text">0</span>
+                <div id="priceRangeSlider" style="flex: 1;"></div>
+                <span id="maxPriceDisplay" class="form-text">10000</span>
+            </div>
+
+            <!-- Hidden fields to submit -->
+            <input type="hidden" name="minPrice" id="minPrice" value="@Context.Request.Query["minPrice"]" />
+            <input type="hidden" name="maxPrice" id="maxPrice" value="@Context.Request.Query["maxPrice"]" />
+        </div>
+
+
+        <!-- Date Range -->
+        <div class="col-md-2">
+            <label class="form-label">Start Date</label>
+            <input type="date" name="startDate" value="@Context.Request.Query["startDate"]" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">End Date</label>
+            <input type="date" name="endDate" value="@Context.Request.Query["endDate"]" class="form-control" />
+        </div>
+
+        <!-- Buttons -->
+        <div class="col-md-12 d-flex gap-2 mt-2">
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <a href="@Url.Action("MarketPlace", "Farmer")" class="btn btn-primary">Clear All</a>
+        </div>
+    </form>
+</div>
+
+
+<section id="recent-posts" class="recent-posts section">
+    @if (TempData["Info"] != null)
+    {
+        <div class="alert alert-info">@TempData["Info"]</div>
+    }
+
+    <div class="container">
+        <div class="row gy-5">
+            @foreach (var product in Model.Products)
+            {
+                <div class="col-xl-4 col-md-6">
+                    <div class="post-item position-relative h-100" data-aos="fade-up" data-aos-delay="100">
+
+                        <div class="post-img position-relative overflow-hidden">
+                            <img src="@product.ImageUrl" class="img-fluid w-100" alt="Post Image" style="height: 250px; object-fit: cover;">
+                            <span class="badge bg-@(product.Status == "Available" ? "success" : "secondary") position-absolute top-0 end-0 m-2">
+                                @product.Status
+                            </span>
+                            <span class="post-date">@product.DateListed.ToShortDateString()</span>
+                        </div>
+
+                        <div class="post-content d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="post-title mb-0">@product.Name</h3>
+                                <span class="text-success fw-bold">R @product.Price</span>
+                            </div>
+
+
+                            <div class="meta d-flex align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-person"></i> <span class="ps-2">@product.Category</span>
+                                </div>
+                                <span class="px-3 text-black-50">/</span>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-folder2"></i> <span class="ps-2">@Model.ProductTypes.FirstOrDefault(pt => pt.ProductTypeId == product.ProductTypeId)?.TypeName</span>
+                                </div>
+                            </div>
+                            <span class="ps-2">@product.Location</span>
+
+                            <hr>
+
+                            <p class="card-text text-muted">
+                                @product.Description?.Substring(0, Math.Min(product.Description.Length, 100))...
+                            </p>
+
+                            <!-- Read More Link -->
+                            <a class="readmore" href="@Url.Action("Details", "Farmer", new { id = product.ProductId })">
+                                <span>Product Details</span><i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div><!-- End post item -->
+            }
+        </div>
+    </div>
+
+</section>
+
+<style>
+    span {
+        font-size: 15px;
+        color: grey;
+    }
+
+    .form-control {
+        margin-bottom: 0px !important;
+    }
+</style>
+
+<script>const slider = document.getElementById('priceRangeSlider');
+    const minInput = document.getElementById('minPrice');
+    const maxInput = document.getElementById('maxPrice');
+    const minDisplay = document.getElementById('minPriceDisplay');
+    const maxDisplay = document.getElementById('maxPriceDisplay');
+
+    const minFromQuery = parseFloat(minInput.value) || 0;
+    const maxFromQuery = parseFloat(maxInput.value) || 10000;
+
+    noUiSlider.create(slider, {
+        start: [minFromQuery, maxFromQuery],
+        connect: true,
+        step: 10,
+        range: {
+            min: 0,
+            max: 10000
+        },
+        format: {
+            to: value => Math.round(value),
+            from: value => Number(value)
+        }
+    });
+
+    slider.noUiSlider.on('update', function (values) {
+        minInput.value = values[0];
+        maxInput.value = values[1];
+        minDisplay.textContent = "R" + values[0];
+        maxDisplay.textContent = "R" + values[1];
+    });</script>
+
+
+<style>
+    #priceRangeSlider .noUi-connect {
+        background: #116531 !important;
+    }
+
+    #priceRangeSlider .noUi-handle {
+        background: #116531 !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+        #priceRangeSlider .noUi-handle:before,
+        #priceRangeSlider .noUi-handle:after {
+            background: white !important;
+        }
+
+    .mt-2 button {
+        width: 100% !important;
+    }
+
+    .mt-2 a {
+        width: 100% !important;
+    }
+</style>

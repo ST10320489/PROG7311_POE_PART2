@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "About";
+    Layout = "_Layout";
+}
+
+
+
+<body class="about-page">
+    <main class="main">
+        <!-- Page Title (Microsoft, 2025)-->
+        <div class="page-title dark-background" data-aos="fade" style="background-image: url('/assets/img/page-title-bg.webp');">
+            <div class="container position-relative">
+                <h1>About</h1>
+                <p>Our mission is to create a connected digital space where farmers, green energy experts, and sustainability enthusiasts can collaborate, share resources, and drive innovation in eco-friendly agriculture.</p>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href=@Url.Action("Index", "Home")>Home</a></li>
+                        <li class="current">About</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+        <!-- About 3 Section -->
+        <section id="about-3" class="about-3 section">
+
+            <div class="container">
+                <div class="row gy-4 justify-content-between align-items-center">
+                    <div class="col-lg-6 order-lg-2 position-relative" data-aos="zoom-out">
+                        <img src="/assets/img/stroper.jpg" alt="Sustainable Farming Image" class="img-fluid">
+                        <a href="https://youtu.be/IInZplUZCs8" class="glightbox pulsating-play-btn">
+                            <span class="play"><i class="bi bi-play-fill"></i></span>
+                        </a>
+                    </div>
+                    <div class="col-lg-5 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+                        <h2 class="content-title mb-4">Growing a Greener Future</h2>
+                        <p class="mb-4">
+                            This platform is designed to support knowledge-sharing and access to technology that promotes both agricultural sustainability and clean energy use. Whether you're a farmer looking to adopt solar irrigation or an expert sharing tips on organic soil health, our ecosystem supports your journey.
+                        </p>
+                        <ul class="list-unstyled list-check">
+                            <li>Connect with farmers and green energy professionals</li>
+                            <li>Access resources on sustainable farming practices</li>
+                            <li>Discover and compare renewable technologies for agriculture</li>
+                        </ul>
+
+                        <p><a href="#" class="btn btn-primary">Get in touch</a></p>
+                    </div>
+                </div>
+            </div>
+        </section><!-- /About 3 Section -->
+
+    </main>
+
+
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/php-email-form/validate.js"></script>
+    <script src="/assets/vendor/aos/aos.js"></script>
+    <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="/assets/js/main.js"></script>
+    <script>AOS.init();</script>
+
+
+</body>
+
+<style>
+    .btn-primary {
+        align-content: center !important;
+    }
+</style>
